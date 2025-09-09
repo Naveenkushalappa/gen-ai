@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigating the World of Generative AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-box {
+            border: 2px solid;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            line-height: 1;
+            color: #2A9D8F;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #F8F9FA;
+            color: #264653;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            max-width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-[#264653] text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center py-12 text-white">
+            <h1 class="text-4xl md:text-6xl font-black text-[#E9C46A] tracking-tight">Navigating the World of Generative AI</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">An overview of the Foundational Models, Transformer Architectures, and Real-World Applications shaping our future.</p>
+        </header>
+
+        <main class="space-y-8">
+
+            <section id="foundation-models" class="bg-white rounded-xl shadow-2xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-[#264653] mb-4">What are Foundational Models?</h2>
+                <p class="text-base text-gray-600 mb-6 max-w-4xl">Foundational models are massive, general-purpose AI systems trained on vast and diverse datasets. They aren't built for just one task; instead, they serve as a powerful, adaptable base that can be fine-tuned for a wide array of specialized applications, from writing poetry to analyzing scientific data.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="text-6xl font-extrabold text-[#E76F51]">1T+</div>
+                        <h3 class="text-lg font-semibold mt-2 text-[#264653]">Massive Datasets</h3>
+                        <p class="text-sm text-gray-500">Trained on text and codebases equivalent to trillions of words.</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                         <div class="text-6xl font-extrabold text-[#F4A261]">🧠</div>
+                        <h3 class="text-lg font-semibold mt-2 text-[#264653]">General Purpose</h3>
+                        <p class="text-sm text-gray-500">Acts like a "master key" adaptable for many different tasks.</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="text-6xl font-extrabold text-[#2A9D8F]">⚙️</div>
+                        <h3 class="text-lg font-semibold mt-2 text-[#264653]">Adaptable Core</h3>
+                        <p class="text-sm text-gray-500">The building block for specialized applications like GPT or Gemini.</p>
+                    </div>
+                </div>
+                <button id="explainButton" class="w-full mt-8 py-3 px-6 rounded-full text-white font-bold transition-transform transform active:scale-95 bg-[#E76F51] hover:bg-[#F4A261]">✨ Explain like I'm a beginner ✨</button>
+            </section>
+
+            <section id="transformers" class="bg-white rounded-xl shadow-2xl p-6 md:p-8">
+                 <h2 class="text-3xl font-bold text-[#264653] mb-4">How Transformers Work: The Engine of Modern AI</h2>
+                <p class="text-base text-gray-600 mb-8 max-w-4xl">The Transformer architecture revolutionized AI by processing entire sequences of data at once. Its key innovation is the "self-attention" mechanism, which allows the model to weigh the importance of different words in a sentence, capturing complex context and relationships to generate incredibly human-like text.</p>
+                <div class="w-full overflow-x-auto p-4">
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-2">
+                        <div class="flow-box border-[#E76F51] text-[#E76F51] bg-red-50 w-full md:w-auto"><span>Input<br/>"The tired animal..."</span></div>
+                        <div class="flow-arrow transform md:-rotate-90">↓</div>
+                        <div class="flow-box border-[#F4A261] text-[#F4A261] bg-orange-50 w-full md:w-auto"><span>Tokenization &<br/>Embedding</span></div>
+                        <div class="flow-arrow transform md:-rotate-90">↓</div>
+                        <div class="relative flow-box border-[#2A9D8F] text-[#2A9D8F] bg-teal-50 w-full md:w-auto font-bold">
+                            <span>Encoder with<br/>Self-Attention</span>
+                             <div class="absolute -top-4 -right-4 bg-[#2A9D8F] text-white text-xs font-bold px-2 py-1 rounded-full animate-pulse">KEY INNOVATION</div>
+                        </div>
+                        <div class="flow-arrow transform md:-rotate-90">↓</div>
+                        <div class="flow-box border-[#264653] text-[#264653] bg-gray-100 w-full md:w-auto"><span>Decoder</span></div>
+                        <div class="flow-arrow transform md:-rotate-90">↓</div>
+                        <div class="flow-box border-gray-500 text-gray-600 bg-gray-50 w-full md:w-auto"><span>Output<br/>"...didn't cross..."</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                <section id="fine-tuning" class="lg:col-span-3 bg-white rounded-xl shadow-2xl p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-[#264653] mb-4">Fine-Tuning & Evaluation</h2>
+                    <p class="text-base text-gray-600 mb-6">To perform specific tasks, general foundational models must be specialized. This "fine-tuning" process adapts the model to a narrower domain, like medicine or law. Afterward, rigorous evaluation ensures the model is accurate, coherent, and free of errors or "hallucinations."</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#2A9D8F] mb-2">Fine-Tuning Approaches</h3>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold">Full Fine-Tuning</h4>
+                                <p class="text-sm text-gray-600">Trains all model parameters on new data. Highly effective but resource-intensive.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                                <h4 class="font-bold">PEFT (Parameter-Efficient)</h4>
+                                <p class="text-sm text-gray-600">Trains only a small subset of parameters. Much faster and more efficient.</p>
+                            </div>
+                        </div>
+                         <div>
+                            <h3 class="text-xl font-semibold text-[#E76F51] mb-2">Balanced Evaluation</h3>
+                             <div class="chart-container h-64 md:h-auto">
+                                <canvas id="evaluationChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="use-cases" class="lg:col-span-2 bg-white rounded-xl shadow-2xl p-6 md:p-8">
+                     <h2 class="text-3xl font-bold text-[#264653] mb-4">Real-World Use Cases</h2>
+                    <p class="text-base text-gray-600 mb-6">Generative AI is already transforming industries by automating tasks and unlocking new creative potential.</p>
+                    <div class="chart-container">
+                        <canvas id="useCasesChart"></canvas>
+                    </div>
+                    <div class="mt-8">
+                        <label for="industryInput" class="block text-sm font-medium text-gray-700">Enter an Industry:</label>
+                        <input type="text" id="industryInput" placeholder="e.g., Healthcare" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        <button id="generateExampleButton" class="w-full mt-4 py-3 px-6 rounded-full text-white font-bold transition-transform transform active:scale-95 bg-[#2A9D8F] hover:bg-[#264653]">✨ Generate an Example ✨</button>
+                    </div>
+                </section>
+            </div>
+             <section id="conclusion" class="text-center py-12">
+                <h2 class="text-3xl font-bold text-white mb-8">The Future is Generative</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg text-white">
+                        <div class="text-4xl mb-2">💡</div>
+                        <h3 class="font-semibold text-lg text-[#E9C46A]">Evolving Field</h3>
+                        <p class="text-gray-300 text-sm">Rapid advancements are a constant.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg text-white">
+                        <div class="text-4xl mb-2">🧩</div>
+                        <h3 class="font-semibold text-lg text-[#E9C46A]">Versatile Starting Point</h3>
+                        <p class="text-gray-300 text-sm">Models provide an adaptable base.</p>
+                    </div>
+                     <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg text-white">
+                        <div class="text-4xl mb-2">✍️</div>
+                        <h3 class="font-semibold text-lg text-[#E9C46A]">Sophisticated Generation</h3>
+                        <p class="text-gray-300 text-sm">Transformers enable nuanced output.</p>
+                    </div>
+                     <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg text-white">
+                        <div class="text-4xl mb-2">🎯</div>
+                        <h3 class="font-semibold text-lg text-[#E9C46A]">Specialized Applications</h3>
+                        <p class="text-gray-300 text-sm">Fine-tuning unlocks industry solutions.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center py-6">
+            <p class="text-sm text-gray-400">Generative AI Infographic &copy; 2025</p>
+        </footer>
+    </div>
+    <div id="apiModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button onclick="document.getElementById('apiModal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-xl font-bold mb-4" id="modalTitle"></h3>
+            <p id="modalContent" class="text-base text-gray-600 leading-relaxed"></p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const colors = {
+                darkBlue: '#264653',
+                teal: '#2A9D8F',
+                yellow: '#E9C46A',
+                orange: '#F4A261',
+                red: '#E76F51'
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+
+            const wrapLabel = (str, maxWidth) => {
+                if (str.length <= maxWidth) return str;
+                const words = str.split(' ');
+                const lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + word).length > maxWidth) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                }
+                lines.push(currentLine.trim());
+                return lines;
+            };
+
+            const useCaseLabels = [
+                'Content Creation', 
+                'Customer Service', 
+                'Software Development', 
+                'Healthcare', 
+                'Education'
+            ].map(label => wrapLabel(label, 16));
+
+            const evaluationCtx = document.getElementById('evaluationChart').getContext('2d');
+            new Chart(evaluationCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Qualitative Review', 'Quantitative Metrics'],
+                    datasets: [{
+                        label: 'Evaluation Balance',
+                        data: [50, 50],
+                        backgroundColor: [colors.red, colors.teal],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: colors.darkBlue,
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            const useCasesCtx = document.getElementById('useCasesChart').getContext('2d');
+            new Chart(useCasesCtx, {
+                type: 'bar',
+                data: {
+                    labels: useCaseLabels,
+                    datasets: [{
+                        label: 'Projected Industry Impact',
+                        data: [85, 80, 95, 75, 60],
+                        backgroundColor: [
+                            colors.teal,
+                            colors.yellow,
+                            colors.red,
+                            colors.orange,
+                            colors.darkBlue
+                        ],
+                        borderRadius: 6,
+                        barPercentage: 0.7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: colors.darkBlue
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: colors.darkBlue,
+                                font: {
+                                    size: 12,
+                                    weight: '600'
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+
+            const explainButton = document.getElementById('explainButton');
+            const generateExampleButton = document.getElementById('generateExampleButton');
+            const industryInput = document.getElementById('industryInput');
+            const modal = document.getElementById('apiModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            const apiKey = "";
+
+            const fetchGeminiResponse = async (prompt) => {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const payload = {
+                    contents: [{
+                        parts: [{
+                            text: prompt
+                        }]
+                    }]
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                return result.candidates[0].content.parts[0].text;
+            };
+
+            explainButton.addEventListener('click', async () => {
+                modalTitle.textContent = 'Foundational Models in Simple Terms';
+                modalContent.textContent = 'Loading...';
+                modal.classList.remove('hidden');
+                const prompt = "Explain what a foundational model is to a person who has no technical knowledge of AI. Use a simple, non-technical analogy. Be concise, use no more than 100 words.";
+                try {
+                    const responseText = await fetchGeminiResponse(prompt);
+                    modalContent.textContent = responseText;
+                } catch (error) {
+                    modalContent.textContent = 'Sorry, something went wrong. Please try again.';
+                }
+            });
+
+            generateExampleButton.addEventListener('click', async () => {
+                const industry = industryInput.value.trim();
+                if (!industry) {
+                    modalTitle.textContent = 'Error';
+                    modalContent.textContent = 'Please enter an industry to generate an example.';
+                    modal.classList.remove('hidden');
+                    return;
+                }
+                modalTitle.textContent = `Generative AI in ${industry}`;
+                modalContent.textContent = 'Loading...';
+                modal.classList.remove('hidden');
+                const prompt = `Give a creative and specific real-world use case for generative AI in the ${industry} industry. Provide a brief description of the use case and its potential impact. Be concise and write in a professional tone.`;
+                try {
+                    const responseText = await fetchGeminiResponse(prompt);
+                    modalContent.textContent = responseText;
+                } catch (error) {
+                    modalContent.textContent = 'Sorry, something went wrong. Please try again.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
